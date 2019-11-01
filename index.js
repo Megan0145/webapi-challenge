@@ -14,18 +14,8 @@ Go code!
 */
 
 require('dotenv').config()
-
-const express = require('express')
-const cors = require('cors')
-const server = express()
+const server = require('./server')
 const port = process.env.PORT
-
-server.use(express.json())
-server.use(cors())
-
-server.get('/', (req, res) => {
-    res.send('Welcome!')
-})
 
 server.listen(port, () => {
     console.log('Server running on ' + port)
