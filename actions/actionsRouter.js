@@ -13,7 +13,7 @@ router.post("/:id/actions", validateProjectId, validateAction, (req, res) => {
       completed: completed
     })
     .then(action => {
-      res.status(201).json(action);
+      res.status(201).json({message: "Action created succesfully", action});
     })
     .catch(err => {
       res.status(500).json({
