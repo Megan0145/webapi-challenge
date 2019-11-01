@@ -41,6 +41,10 @@ router.get("/:id/actions", validateProjectId, (req, res) => {
     });
 });
 
+router.get("/:id/actions/:action_id", validateProjectId, validateActionId, (req, res) => {
+   res.status(200).json(req.action)
+  });
+
 router.put("/:id/actions/:action_id", validateProjectId, validateAction, (req, res) => {
     actions.update(req.params.action_id, req.body)
     .then(action => {
@@ -85,6 +89,21 @@ function validateAction(req, res, next) {
   } else {
     next();
   }
+}
+
+function validateActionId(req, res, next) {
+    actions.get(req.params.action_id)
+    .then(action => {
+        if(action){
+            req.action = action;
+            next()
+        } else {
+            res.status(404).json({message: "Action not found"})
+        }
+    })
+    .catch(err => {
+        res.status(500).json({message: err.message})
+    })
 }
 
 module.exports = router;
