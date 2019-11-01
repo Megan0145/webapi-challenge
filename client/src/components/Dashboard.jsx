@@ -1,4 +1,5 @@
 import React from 'react';
+import ProjectCard from './ProjectCard';
 
 export default function Dashboard(props) {
     const { projects } = props;
@@ -12,7 +13,7 @@ export default function Dashboard(props) {
             {
                 projects.map(project => {
                     return(
-                        <div>{project.name}</div>
+                        <ProjectCard project={project}/>
                     )
                 })
             }
