@@ -9,13 +9,11 @@ router.get("/", (req, res) => {
       res.status(200).json(projects);
     })
     .catch(err => {
-      res
-        .status(500)
-        .json({
-          message:
-            "Something went terribly wrong trying to retrieve all projects: " +
-            err.message
-        });
+      res.status(500).json({
+        message:
+          "Something went terribly wrong trying to retrieve all projects: " +
+          err.message
+      });
     });
 });
 
@@ -30,12 +28,27 @@ router.post("/", validateProject, (req, res) => {
       res.status(201).json(project);
     })
     .catch(err => {
+      res.status(500).json({
+        message:
+          "Something went terribly wrong trying to create new project: " +
+          err.message
+      });
+    });
+});
+
+router.put("/:id", validateProjectId, validateProject, (req, res) => {
+  projects
+    .update(req.project.id, req.body)
+    .then(project => {
+      res
+        .status(200)
+        .json({ message: "Updated successfully", project: project });
+    })
+    .catch(err => {
       res
         .status(500)
         .json({
-          message:
-            "Something went terribly wrong trying to create new project: " +
-            err.message
+          message: `Something went terribly wrong trying to update project with id of ${req.project.id}: ${err.message}`
         });
     });
 });
@@ -56,11 +69,9 @@ function validateProjectId(req, res, next) {
       }
     })
     .catch(err => {
-      res
-        .status(500)
-        .json({
-          message: `Something went terribly wrong trying to retrieve project with id of ${id}: ${err.message}`
-        });
+      res.status(500).json({
+        message: `Something went terribly wrong trying to retrieve project with id of ${id}: ${err.message}`
+      });
     });
 }
 
