@@ -55,7 +55,7 @@ router.delete("/:id", validateProjectId, (req, res) => {
   projects
     .remove(req.project.id)
     .then(() => {
-      res.status(200).json({ message: "Post deleted" });
+      res.status(200).json({ message: "Post deleted", id: req.project.id });
     })
     .catch(err => {
       res.status(500).json({
