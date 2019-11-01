@@ -22,8 +22,9 @@ router.get("/:id", validateProjectId, (req, res) => {
 });
 
 router.post("/", validateProject, (req, res) => {
+  const completed = req.body.completed ? req.body.completed : false
   projects
-    .insert(req.body)
+    .insert({name: req.body.name, description: req.body.description, completed: completed})
     .then(project => {
       res.status(201).json(project);
     })
