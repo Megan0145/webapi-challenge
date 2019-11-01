@@ -13,7 +13,7 @@ export default function Dashboard(props) {
             {
                 projects.map(project => {
                     return(
-                        <ProjectCard project={project}/>
+                        <ProjectCard key={project.id} project={project}/>
                     )
                 })
             }

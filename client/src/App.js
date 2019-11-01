@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {  BrowserRouter as Router } from 'react-router-dom';
 import axios from "axios";
 import Navbar from './components/Navbar';
+import { StyledAppContainer } from './styles';
 
 function App() {
   const [projects, setProjects] = useState(null)
@@ -18,9 +19,9 @@ function App() {
   }, []);
   return (
     <Router>
-      <div className="App">
+      <StyledAppContainer>
       <Navbar projects={projects} />
-      </div>
+      </StyledAppContainer>
     </Router>
   );
 }
