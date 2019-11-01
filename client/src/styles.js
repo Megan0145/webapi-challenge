@@ -4,6 +4,8 @@ export const StyledAppContainer = styled.div`
     width: 100vw;
     background-color: whitesmoke;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 `;
 
 export const StyledNav = styled.nav`
@@ -18,4 +20,23 @@ export const StyledNav = styled.nav`
         font-size: 1.8rem;
         color: grey;
     }
+`;
+
+export const StyledProjectCard = styled.div`
+    background-color: #e4e7ff;
+    padding: 2rem;
+    margin: 3vh 0;
+    width: 80%;
+    color: grey;
+    h2 {
+        color: #636363;
+    }
+`;
+export const StyledDashboard = styled.div`
+    width: 100%;
+    display: flex;
+    min-height: 80vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `;

@@ -1,5 +1,6 @@
 import React from 'react';
 import ProjectCard from './ProjectCard';
+import { StyledDashboard } from '../styles';
 
 export default function Dashboard(props) {
     const { projects } = props;
@@ -8,8 +9,7 @@ export default function Dashboard(props) {
         return <p>Loading...</p>
     } 
     return(
-        <div>
-            Dashboard
+        <StyledDashboard>
             {
                 projects.map(project => {
                     return(
@@ -17,6 +17,6 @@ export default function Dashboard(props) {
                     )
                 })
             }
-        </div>
+        </StyledDashboard>
     );
 }
