@@ -55,6 +55,16 @@ router.put("/:id/actions/:action_id", validateProjectId, validateAction, (req, r
     })
 })
 
+router.delete("/:id/actions/:action_id", validateProjectId, validateActionId, (req, res) => {
+    actions.remove(req.params.action_id)
+    .then(() => {
+        res.status(200).json({message: `Post deleted succesfully`, id: req.params.id})
+    })
+    .catch(err => {
+        res.status(500).json({message: `Something went terribly wrong trying to delete the action with id of ${req.params.action_id} : ${err.message}`})
+    })
+})
+
 //middleware
 function validateProjectId(req, res, next) {
   const { id } = req.params;
