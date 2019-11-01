@@ -45,10 +45,23 @@ router.put("/:id", validateProjectId, validateProject, (req, res) => {
         .json({ message: "Updated successfully", project: project });
     })
     .catch(err => {
+      res.status(500).json({
+        message: `Something went terribly wrong trying to update project with id of ${req.project.id}: ${err.message}`
+      });
+    });
+});
+
+router.delete("/:id", validateProjectId, (req, res) => {
+  projects
+    .remove(req.project.id)
+    .then(() => {
+      res.status(200).json({ message: "Post deleted"});
+    })
+    .catch(err => {
       res
         .status(500)
         .json({
-          message: `Something went terribly wrong trying to update project with id of ${req.project.id}: ${err.message}`
+          message: `Something went terribly wrong trying to delete the post with the id of ${req.project.id}: ${err.message}`
         });
     });
 });
