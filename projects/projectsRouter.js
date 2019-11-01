@@ -21,27 +21,6 @@ router.get("/:id", validateProjectId, (req, res) => {
   res.status(200).json(req.project);
 });
 
-router.get("/:id/actions", validateProjectId, (req, res) => {
-  projects
-    .getProjectActions(req.params.id)
-    .then(actions => {
-      if (actions.length) {
-        res.status(200).json(actions);
-      } else {
-        res
-          .status(200)
-          .json({ message: "This project doesn't have any actions yet" });
-      }
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({
-          message: `Something went terribly wrong trying to retrieve the actions for project with id of ${req.params.id}: ${err.message}`
-        });
-    });
-});
-
 router.post("/", validateProject, (req, res) => {
   projects
     .insert(req.body)

@@ -3,7 +3,7 @@ const actions = require("../data/helpers/actionModel");
 const projects = require("../data/helpers/projectModel");
 const router = express.Router();
 
-router.post("/:id", validateProjectId, validateAction, (req, res) => {
+router.post("/:id/actions", validateProjectId, validateAction, (req, res) => {
   const completed = req.body.completed ? req.body.completed : false;
   actions
     .insert({
@@ -16,13 +16,40 @@ router.post("/:id", validateProjectId, validateAction, (req, res) => {
       res.status(201).json(action);
     })
     .catch(err => {
-      res
-        .status(500)
-        .json({
-          message: `Something went terribly wrong trying to create the action for project with id of ${req.project.id}: ${err.message}`
-        });
+      res.status(500).json({
+        message: `Something went terribly wrong trying to create the action for project with id of ${req.project.id}: ${err.message}`
+      });
     });
 });
+
+router.get("/:id/actions", validateProjectId, (req, res) => {
+  projects
+    .getProjectActions(req.params.id)
+    .then(actions => {
+      if (actions.length) {
+        res.status(200).json(actions);
+      } else {
+        res
+          .status(200)
+          .json({ message: "This project doesn't have any actions yet" });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: `Something went terribly wrong trying to retrieve the actions for project with id of ${req.params.id}: ${err.message}`
+      });
+    });
+});
+
+router.put("/:id/actions/:action_id", validateProjectId, validateAction, (req, res) => {
+    actions.update(req.params.action_id, req.body)
+    .then(action => {
+        res.status(200).json({message: "Updated successfully", action})
+    })
+    .catch(err => {
+        res.status(500).json({message: `Something went terribly wrong trying to update the action with id of ${req.params.action_id} : ${err.message}`})
+    })
+})
 
 //middleware
 function validateProjectId(req, res, next) {

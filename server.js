@@ -7,7 +7,7 @@ const server = express()
 server.use(express.json())
 server.use(cors())
 server.use('/api/projects', projectsRouter)
-server.use('/api/actions', actionsRouter)
+server.use('/api/projects', actionsRouter)
 
 server.get('/', (req, res) => {
     res.send('Welcome!')
