@@ -28,8 +28,19 @@ export const StyledProjectCard = styled.div`
     margin: 3vh 0;
     width: 80%;
     color: grey;
+    box-shadow: 5px 5px 15px grey;
+    border-radius: 15px;
     h2 {
         color: #636363;
+    }
+    button {
+        padding: 1rem;
+        border-radius: 15px;
+        border: none;
+        margin-right: 1rem;
+        box-shadow: 5px 5px 15px grey;
+        font-size: 1rem;
+        cursor: pointer;
     }
 `;
 export const StyledDashboard = styled.div`

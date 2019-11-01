@@ -6,7 +6,8 @@ export default function ProjectCard({project}){
         <StyledProjectCard style={project.completed ? {"background": "#cfffd8"} : {"background": "#ffdcdc"}}>
            <h2>{project.name}</h2>
            <p>{project.description}</p>
-           <p>Completed: {project.completed ? "Yes" : "No"}</p>
+           <button>Mark Complete</button>
+           <button>Go to Project</button>
            {console.log(project)}
         </StyledProjectCard>
     );
